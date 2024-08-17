@@ -96,20 +96,6 @@ describe('comparing json objects', () => {
     expect(comparison).not.toHaveProperty('options');
   });
 
-  test('returns obj2 if nothing is in obj1', () => {
-    const obj1 = {};
-    /** @type {Types.Field} */
-    const obj2 = {
-      type: 'Text',
-      key: 'text2_key',
-    };
-
-    const comparison = compareFields(obj1, obj2);
-    expect(Object.keys(comparison).length).toBe(2);
-    expect(comparison.key).toBe('text2_key');
-    expect(comparison).not.toHaveProperty('options');
-  });
-
   test('returns an empty obj if both objects are empty', () => {
     const obj1 = {};
     const obj2 = {};

@@ -1,0 +1,28 @@
+<table class="diff-table">
+    <thead>
+      <td>Field type</td>
+      <td>Field key</td>
+      <td>Options in file 1</td>
+      <td>Options in file 2</td>
+    </thead>
+    <% data.forEach(function(item) { %>
+      <tr>
+        <td><%= item.type %></td>
+        <td><%= item.key %></td>
+        <td>
+          <% if ('options' in item && 'inObj1' in item.options) { %>
+            <%= item.options.inObj1.join(', ') %>
+          <% } else{ %>  
+            -
+          <% } %>
+        </td>
+        <td>
+          <% if ('options' in item && 'inObj1' in item.options) { %>
+            <%= item.options.inObj2.join(', ') %>
+          <% } else{ %>  
+            -
+          <% } %>
+        </td>
+      </tr>
+    <% }); %>
+  </table>

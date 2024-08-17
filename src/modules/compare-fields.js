@@ -16,21 +16,9 @@ export function compareFields(obj1, obj2) {
     return res;
   }
 
-  if (numOfKeysObj1 === 0 && numOfKeysObj2 > 0) {
-    res.key = obj2.key;
-    res.type = obj2.type;
-    if ('options' in obj2) {
-      res.options = {
-        inObj1: [],
-        inObj2: obj2.options,
-      };
-    }
-    return res;
-  }
-
   if (numOfKeysObj1 > 0 && numOfKeysObj2 === 0) {
-    res.key = obj1.key;
     res.type = obj1.type;
+    res.key = obj1.key;
     if ('options' in obj1) {
       res.options = {
         inObj1: obj1.options,
@@ -41,12 +29,11 @@ export function compareFields(obj1, obj2) {
   }
 
   const optionsIn1ButNot2 = 'options' in obj1 && !('options' in obj2);
-  const optionsIn2ButNot1 = 'options' in obj2 && !('options' in obj1);
   const optionsInBoth = 'options' in obj1 && 'options' in obj2;
 
-  if (optionsIn1ButNot2 || optionsIn2ButNot1) {
-    res.key = obj1.key;
+  if (optionsIn1ButNot2) {
     res.type = obj1.type;
+    res.key = obj1.key;
     res.options = {
       inObj1: obj1.options,
       inObj2: [],
@@ -54,15 +41,10 @@ export function compareFields(obj1, obj2) {
     return res;
   }
 
-  if (obj1.key !== obj2.key) {
-    res.type = obj1.type;
-    res.key = obj1.key;
-  }
-
   if (optionsInBoth) {
     if (obj1.options.length !== obj2.options.length) {
-      res.key = obj1.key;
       res.type = obj1.type;
+      res.key = obj1.key;
       res.options = {
         inObj1: arrayComplement(obj1.options, obj2.options),
         inObj2: arrayComplement(obj2.options, obj1.options),
@@ -71,13 +53,18 @@ export function compareFields(obj1, obj2) {
     }
 
     if (!haveSameElements(obj1.options, obj2.options)) {
-      res.key = obj1.key;
       res.type = obj1.type;
+      res.key = obj1.key;
       res.options = {
         inObj1: arrayComplement(obj1.options, obj2.options),
         inObj2: arrayComplement(obj2.options, obj1.options),
       };
     }
+  }
+
+  if (obj1.key !== obj2.key) {
+    res.type = obj1.type;
+    res.key = obj1.key;
   }
 
   return res;

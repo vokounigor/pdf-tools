@@ -1,0 +1,59 @@
+<style scoped>
+table,
+th,
+td {
+	border: 1px solid black;
+}
+
+.diff-table {
+	border-collapse: collapse;
+	margin: 0 0 25px 0;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.diff-table thead tr {
+	background-color: lightgray;
+	color: black;
+	text-align: left;
+}
+
+.diff-table th,
+.diff-table td {
+	padding: 12px 15px;
+}
+
+.diff-table tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+.diff-table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+</style>
+
+<div class="table-container" data-name="table">
+  <div class="table-container__button">
+    <p>Keys in file 1 that are not present or are different from those in file 2</p>
+    <button
+      class="cursor-pointer"
+      hx-on:click="document.querySelectorAll('[data-name=table]').forEach(e => e.classList.toggle('d-none'))"
+    >Swap</button>
+  </div>
+  <%- include('./diff-table', { data: diff1 }) %>
+</div>
+
+<div class="table-container d-none" data-name="table">
+  <div class="table-container__button">
+    <p>Keys in file 2 that are not present or are different from those in file 1</p>
+    <button
+      class="cursor-pointer"
+      hx-on:click="document.querySelectorAll('[data-name=table]').forEach(e => e.classList.toggle('d-none'))"
+      >
+      Swap
+    </button>
+  </div>
+  <%- include('./diff-table', { data: diff2 }) %>
+</div>

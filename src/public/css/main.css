@@ -1,3 +1,16 @@
+.htmx-indicator {
+	opacity: 0;
+	transition: opacity 500ms ease-in;
+}
+
+.htmx-request .htmx-indicator {
+	opacity: 1;
+}
+
+.htmx-request.htmx-indicator {
+	opacity: 1;
+}
+
 .self-center {
 	align-self: center;
 }
@@ -42,6 +55,7 @@
 	border-radius: 4px;
 	min-width: 180px;
 	max-width: 250px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .svg_image {
@@ -64,15 +78,34 @@
 	align-items: center;
 }
 
-.htmx-indicator {
-	opacity: 0;
-	transition: opacity 500ms ease-in;
+.submit-btn {
+	max-width: 8rem;
+	padding: 0.5em 2em;
+	cursor: pointer;
 }
 
-.htmx-request .htmx-indicator {
-	opacity: 1;
+#uploaded {
+	max-width: clamp(800px, 80%, 1200px);
 }
 
-.htmx-request.htmx-indicator {
-	opacity: 1;
+.table-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.table-container__button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+}
+
+.table-container__button>button {
+	font-size: 14px;
+}
+
+.d-none {
+	display: none;
 }
