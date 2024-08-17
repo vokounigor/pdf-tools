@@ -1,0 +1,82 @@
+@font-face {
+	font-family: 'poppins';
+	font-style: light;
+	font-weight: 300;
+	font-display: swap;
+	src: url("/static/assets/fonts/Poppins-Light.ttf");
+}
+
+@font-face {
+	font-family: 'poppins';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("/static/assets/fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+	font-family: 'poppins';
+	font-style: medium;
+	font-weight: 500;
+	font-display: swap;
+	src: url("/static/assets/fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+	font-family: 'poppins';
+	font-style: bold;
+	font-weight: 700;
+	font-display: swap;
+	src: url("/static/assets/fonts/Poppins-Bold.ttf");
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	font-family: 'Poppins', sans-serif;
+	margin: 0;
+}
+
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-width: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}

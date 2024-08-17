@@ -1,0 +1,8 @@
+services:
+  pdf-parser:
+    restart: always
+    build:
+      dockerfile: ./docker/prod/Dockerfile
+      context: .
+    ports:
+      - '3000:3000'

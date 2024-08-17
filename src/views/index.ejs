@@ -1,0 +1,18 @@
+<%- include('base/header', { title: 'PDF Tools' }) -%>
+	<h1 class="header self-center">PDF Tools</h1>
+	<h4 class="subheader self-center">What do you need to do today?</h4>
+  <div class="container self-center" hx-boost="true">
+    <a class="box" href="/compare">
+      <p>Compare 2 files</p>
+      <div class="svg_image">
+        <%- include('svgs/compare.svg') -%>
+      </div>
+    </a>
+    <a class="box" href="/compare-group">
+      <p>Group compare</p>
+      <div class="svg_image">
+        <%- include('svgs/documents.svg') -%>
+      </div>
+    </a>
+  </div>
+<%- include('base/footer') %>

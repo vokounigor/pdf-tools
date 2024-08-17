@@ -1,0 +1,75 @@
+<%- include('base/header', { title: 'PDF Tools - Compare 2 files' }) -%>
+	<h1 class="header self-center">PDF Tools</h1>
+	<h4 class="subheader self-center">Upload the files for comparison</h4>
+	<form
+		id="upload-two-files"
+    class="self-center"
+		hx-encoding="multipart/form-data"
+		hx-post="/api/compare"
+		hx-swap="innerHTML"
+		hx-target="#uploaded"
+    hx-indicator="#spinner"
+	>
+      <div class="boxes">
+      <div
+        class="box"
+        hx-on:click="document.getElementById('file1').click()"
+        aria-details="Upload file 1"
+        >
+        <label class="cursor-pointer">
+          <span>Upload file 1</span>
+          <input id="file1" name="file1" type="file" accept=".pdf" class="hidden" required />
+        </label>
+        <div class="svg_image">
+          <%- include('svgs/document.svg') -%>
+        </div>
+        <span class="file1_size"></span>
+      </div>
+      <div
+        class="box"
+        hx-on:click="document.getElementById('file2').click()"
+        aria-details="Upload file 2"
+      >
+        <label class="cursor-pointer">
+          <span>Upload file 2</span>
+          <input id="file2" name="file2" type="file" accept=".pdf" class="hidden" required />
+        </label>
+        <div class="svg_image">
+          <%- include('svgs/document.svg') -%>
+        </div>
+        <span class="file2_size"></span>
+      </div>
+    </div>
+    <button type="submit">Upload</button>
+	</form>
+  <div id="spinner" class="self-center svg_image htmx-indicator">
+    <%- include('svgs/loading.svg') -%>
+  </div>
+
+	<div id="uploaded" class="self-center"></div>
+
+  <script>
+    /**
+     * @argument {'file1' | 'file2'} inputId
+     * @returns {void}
+     */
+    function onInputChange(inputId) {
+      /** @type {HTMLInputElement} */
+      const input = document.getElementById(inputId);
+      input.onchange = () => {
+        const file = input.files[0];
+        /** @type {HTMLSpanElement} */
+        const label = input.previousElementSibling;
+        let labelText = file.name;
+        if (labelText.length > 20) {
+          labelText = `${file.name.slice(0, 10)}...${file.name.slice(file.name.length - 10)}`;
+        }
+        label.innerHTML = labelText;
+        document.querySelector(`.${inputId}_size`).innerHTML = `${Math.round(file.size / 1024 / 1024 * 100) / 100}MB`
+      }
+    }
+  
+    onInputChange('file1')
+    onInputChange('file2')
+  </script>
+<%- include('base/footer') %>

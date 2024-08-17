@@ -1,0 +1,22 @@
+---
+FieldType: Button
+FieldName: select_thing
+FieldFlags: 332123321
+FieldJustification: Left
+FieldStateOption: Yes
+FieldStateOption: Off
+FieldStateOption: No
+---
+FieldType: Text
+FieldName: Name
+FieldFlags: 123456987
+FieldValue: test
+FieldValueDefault: test
+FieldJustification: Left
+---
+FieldType: Text
+FieldName: Surname
+FieldFlags: 123456789
+FieldValue: test_surname
+FieldValueDefault: test_surname
+FieldJustification: Left
