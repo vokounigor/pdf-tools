@@ -99,13 +99,36 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 1rem;
+	gap: 4rem;
 }
 
 .table-container__button>button {
 	font-size: 14px;
 }
 
+.table-container__button>p {
+	max-width: 800px;
+}
+
 .d-none {
 	display: none;
+}
+
+.text-medium {
+	font-weight: 500;
+}
+
+.svg-button {
+	display: inline-block;
+	width: 1.5rem;
+}
+
+.btn-group {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.btn-group>button {
+	padding: 0.4em 0.5em 0 0.5em;
 }

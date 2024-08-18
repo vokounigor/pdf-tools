@@ -34,26 +34,82 @@ td {
 }
 </style>
 
+
 <div class="table-container" data-name="table">
   <div class="table-container__button">
-    <p>Keys in file 1 that are not present or are different from those in file 2</p>
-    <button
-      class="cursor-pointer"
-      hx-on:click="document.querySelectorAll('[data-name=table]').forEach(e => e.classList.toggle('d-none'))"
-    >Swap</button>
+    <p>
+      Keys in <span class="text-medium"><%= file1 %></span>
+      that are not present or are different from those in
+      <span class="text-medium"><%= file2 %></span>
+    </p>
+    <div class="btn-group">
+      <button id="dwn1" class="cursor-pointer">
+        <span class="svg-button"><%- include('../svgs/download.svg') -%></span>
+      </button>
+      <button
+        class="cursor-pointer"
+        hx-on:click="document.querySelectorAll('[data-name=table]').forEach(e => e.classList.toggle('d-none'))"
+      >
+      <span class="svg-button">
+        <%- include('../svgs/swap.svg') %>
+      </span>
+      </button>
+    </div>
   </div>
   <%- include('./diff-table', { data: diff1 }) %>
 </div>
 
 <div class="table-container d-none" data-name="table">
   <div class="table-container__button">
-    <p>Keys in file 2 that are not present or are different from those in file 1</p>
-    <button
-      class="cursor-pointer"
-      hx-on:click="document.querySelectorAll('[data-name=table]').forEach(e => e.classList.toggle('d-none'))"
+    <p>
+      Keys in <span class="text-medium"><%= file2 %></span>
+      that are not present or are different from those in
+      <span class="text-medium"><%= file1 %></span>
+    </p>
+    <div class="btn-group">
+      <button id="dwn2" class="cursor-pointer">
+        <span class="svg-button"><%- include('../svgs/download.svg') -%></span>
+      </button>
+      <button
+        class="cursor-pointer"
+        hx-on:click="document.querySelectorAll('[data-name=table]').forEach(e => e.classList.toggle('d-none'))"
       >
-      Swap
-    </button>
+      <span class="svg-button">
+        <%- include('../svgs/swap.svg') %>
+      </span>
+      </button>
+    </div>
   </div>
   <%- include('./diff-table', { data: diff2 }) %>
 </div>
+
+
+<script>
+  function generateCSV(data) {
+    const parsedData = JSON.parse(data);
+    let csvData = 'Field Type,Field Key,Options in file 1,Options in file2\n';
+    for (let i = 0; i < parsedData.length; i++) {
+      const datum = parsedData[i];
+      csvData +=
+        `${datum.type},${datum.key},"${datum.options?.inObj1?.join(', ') ?? '-'}","${datum.options?.inObj2?.join(', ') ?? '-'}"\n`
+    }
+    return csvData
+  }
+
+  function downloadCSV(data) {
+    const csv = generateCSV(data)
+    var a = document.createElement('a');
+    a.href = "data:application/octet-stream," + encodeURIComponent(csv)
+    a.download = "diffKeys.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  var btn = document.getElementById('dwn1');
+  var btn2 = document.getElementById('dwn2');
+  var diffData1 = `<%- JSON.stringify(diff1) %>`
+  var diffData2 = `<%- JSON.stringify(diff2) %>`
+  btn.onclick = () => downloadCSV(diffData1);
+  btn2.onclick = () => downloadCSV(diffData2);
+</script>

@@ -1,9 +1,8 @@
 <%- include('base/header', { title: 'PDF Tools - Compare 2 files' }) -%>
-	<h1 class="header self-center">PDF Tools</h1>
-	<h4 class="subheader self-center">Upload the files for comparison</h4>
+	<h1 class="header">PDF Tools</h1>
+	<h4 class="subheader">Upload the files for comparison</h4>
 	<form
 		id="upload-two-files"
-    class="self-center"
 		hx-encoding="multipart/form-data"
 		hx-post="/api/compare"
 		hx-swap="innerHTML"
@@ -46,7 +45,7 @@
     <%- include('svgs/loading.svg') -%>
   </div>
 
-	<div id="uploaded" class="self-center"></div>
+	<div id="uploaded"></div>
 
   <script>
     /**
@@ -59,12 +58,12 @@
       input.onchange = () => {
         const file = input.files[0];
         /** @type {HTMLSpanElement} */
-        const label = input.previousElementSibling;
+        const labelSpan = input.previousElementSibling;
         let labelText = file.name;
         if (labelText.length > 20) {
           labelText = `${file.name.slice(0, 10)}...${file.name.slice(file.name.length - 10)}`;
         }
-        label.innerHTML = labelText;
+        labelSpan.innerHTML = labelText;
         document.querySelector(`.${inputId}_size`).innerHTML = `${Math.round(file.size / 1024 / 1024 * 100) / 100}MB`
       }
     }

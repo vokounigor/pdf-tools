@@ -41,7 +41,12 @@ router.post(
     rmSync(file1Output, { force: true });
     rmSync(file2Output, { force: true });
 
-    return res.render('partials/diff-tables', { diff1, diff2 });
+    return res.render('partials/diff-tables', {
+      file1: file1.name,
+      file2: file2.name,
+      diff1,
+      diff2,
+    });
   }
 );
 
