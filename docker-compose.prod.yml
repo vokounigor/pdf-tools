@@ -1,5 +1,5 @@
 services:
-  pdf-parser:
+  pdf-tools:
     restart: always
     build:
       dockerfile: ./docker/prod/Dockerfile
