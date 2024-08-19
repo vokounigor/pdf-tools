@@ -23,7 +23,7 @@ router.get('/compare-group', (_, res) => {
 
 router.post(
   '/api/compare',
-  fileUpload({ limits: { fileSize: mbToByte(10) } }),
+  fileUpload({ limits: { fileSize: mbToByte(10), files: 2 } }),
   fileValidator,
   async (req, res) => {
     /** @type {{file1: fileUpload.UploadedFile; file2: fileUpload.UploadedFile; }} */
