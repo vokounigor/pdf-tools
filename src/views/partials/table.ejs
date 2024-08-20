@@ -1,0 +1,20 @@
+<table class="diff-table">
+  <thead>
+    <td>Field type</td>
+    <td>Field key</td>
+    <td>Options</td>
+  </thead>
+  <% data.forEach(function(item) { %>
+  <tr>
+    <td><%= item.type %></td>
+    <td><%= item.key %></td>
+    <td>
+      <% if ('options' in item) { %>
+      <%= item.options.join(', ') %>
+      <% } else { %>
+      -
+      <% } %>
+    </td>
+  </tr>
+  <% }); %>
+</table>

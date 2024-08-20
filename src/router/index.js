@@ -3,7 +3,10 @@ import { Router } from 'express';
 import fileUpload from 'express-fileupload';
 import { mbToByte } from '../utils/converters.js';
 import { dumpFieldsAndDeleteFile } from '../modules/pdftk-wrapper.js';
-import { parseFieldsToMap } from '../modules/fields-to-json.js';
+import {
+  parseFieldsToJsonArray,
+  parseFieldsToMap,
+} from '../modules/fields-to-json.js';
 import { fileValidator } from '../middleware/file-validator-middleware.js';
 import { fileComplement } from '../modules/compare-maps.js';
 
@@ -11,6 +14,10 @@ const router = Router();
 
 router.get('/', (_, res) => {
   return res.render('index');
+});
+
+router.get('/file', (_, res) => {
+  return res.render('single-file');
 });
 
 router.get('/compare', (_, res) => {
@@ -41,11 +48,37 @@ router.post(
     rmSync(file1Output, { force: true });
     rmSync(file2Output, { force: true });
 
-    return res.render('partials/diff-tables', {
+    return res.render('partials/diff-overview', {
       file1: file1.name,
       file2: file2.name,
       diff1,
       diff2,
+    });
+  }
+);
+
+router.post(
+  '/api/single-file',
+  fileUpload({ limits: { fileSize: mbToByte(10), files: 1 } }),
+  async (req, res) => {
+    if (
+      !('file' in req.files) ||
+      req.files.file.mimetype !== 'application/pdf'
+    ) {
+      return res.status(400).send(`<div>An error occurred.</div>`);
+    }
+    /** @type {{file: fileUpload.UploadedFile }} */
+    const { file } = req.files;
+
+    const fileOutput = dumpFieldsAndDeleteFile(file.data);
+    const fileKeysArr = await parseFieldsToJsonArray(
+      createReadStream(fileOutput)
+    );
+    rmSync(fileOutput, { force: true });
+
+    return res.render('partials/keys-overview', {
+      fileName: file.name,
+      data: fileKeysArr,
     });
   }
 );

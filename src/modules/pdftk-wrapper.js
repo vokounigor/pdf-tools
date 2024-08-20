@@ -9,7 +9,7 @@ import { DATE_FORMAT_MILLISECONDS } from '../constants/date.js';
  * @returns {void}
  */
 function dumpDataFields(file, output) {
-  execSync(`pdftk ${file} dump_data_fields output ${output}`);
+  execSync(`pdftk ${file} dump_data_fields_utf8 output ${output}`);
 }
 
 /**

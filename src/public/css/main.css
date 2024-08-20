@@ -63,7 +63,7 @@
 	height: 4rem;
 }
 
-#upload-two-files {
+#upload-files-form {
 	margin-top: 3rem;
 	display: flex;
 	flex-direction: column;
@@ -131,4 +131,8 @@
 
 .btn-group>button {
 	padding: 0.4em 0.5em 0 0.5em;
+}
+
+.mb-1 {
+	margin-bottom: 1rem;
 }

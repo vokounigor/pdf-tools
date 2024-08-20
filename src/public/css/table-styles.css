@@ -1,0 +1,33 @@
+table,
+th,
+td {
+	border: 1px solid black;
+}
+
+.diff-table {
+	border-collapse: collapse;
+	margin: 0 0 25px 0;
+	font-size: 0.9em;
+	font-family: sans-serif;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.diff-table thead tr {
+	background-color: lightgray;
+	color: black;
+	text-align: left;
+}
+
+.diff-table th,
+.diff-table td {
+	padding: 12px 15px;
+}
+
+.diff-table tbody tr {
+	border-bottom: 1px solid #dddddd;
+}
+
+.diff-table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}

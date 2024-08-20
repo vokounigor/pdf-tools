@@ -1,0 +1,28 @@
+<%- include('base/header', { title: 'PDF Tools - View File' }) -%>
+<h1 class="header">PDF Tools</h1>
+<h4 class="subheader">Upload a PDF file</h4>
+<form id="upload-files-form" hx-encoding="multipart/form-data" hx-post="/api/single-file" hx-swap="innerHTML" hx-target="#uploaded" hx-indicator="#spinner">
+  <div class="box" aria-details="Upload file" hx-on:click="document.getElementById('file').click()">
+    <label class="cursor-pointer">
+      <span>Upload file</span>
+      <input id="file" name="file" type="file" accept=".pdf" class="hidden" required />
+    </label>
+    <div class="svg_image">
+      <%- include('svgs/document.svg') -%>
+    </div>
+    <span class="file_size"></span>
+  </div>
+  <button type="submit" class="submit-btn self-center">Upload</button>
+</form>
+<div id="spinner" class="self-center svg_image htmx-indicator">
+  <%- include('svgs/loading.svg') -%>
+</div>
+
+<div id="uploaded"></div>
+
+<script src="/static/js/on-change.js"></script>
+<script defer>
+  onInputChange('file');
+</script>
+
+<%- include('base/footer') %>

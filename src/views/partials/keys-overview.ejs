@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/static/css/table-styles.css" />
+<div class="mb-1 table-container__button">
+  <p>Keys in <span class="text-medium"><%= fileName %></span>&nbsp;(<%= data?.length %> total)</p>
+  <button id="download" class="cursor-pointer">
+    <span class="svg-button"><%- include('../svgs/download.svg') -%></span>
+  </button>
+</div>
+
+<div class="table-container"><%- include('./table', { data }) %></div>
+
+<script src="/static/js/download-csv.js"></script>
+<script defer>
+  var btn = document.getElementById('download');
+  var keysData = `<%- JSON.stringify(data) %>`;
+  btn.onclick = () => downloadCSVKeys(keysData);
+</script>
