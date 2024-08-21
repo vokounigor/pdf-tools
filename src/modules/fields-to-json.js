@@ -1,4 +1,3 @@
-import { ReadStream } from 'node:fs';
 import readline from 'readline';
 import {
   LINE_BREAK_DELIMITER,

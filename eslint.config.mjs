@@ -2,18 +2,20 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
+/** @type { import("eslint").Linter.Config[] } */
 export default [
   {
-    env: 'node',
     languageOptions: { globals: globals.node },
-    overrides: [
-      {
-        files: ['tests/**/*'],
-        env: {
-          jest: true,
-        },
-      },
-    ],
+  },
+  {
+    rules: {
+      'no-unused-vars': ['error', { varsIgnorePattern: 'Types' }],
+      'prefer-const': ['error', { ignoreReadBeforeAssign: true }],
+      semi: 'error',
+    },
+  },
+  {
+    ignores: ['src/public/'],
   },
   pluginJs.configs.recommended,
   eslintPluginPrettierRecommended,

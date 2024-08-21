@@ -10,6 +10,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "docker": "docker compose --file ./docker-compose.dev.yml up",
+    "lint": "eslint \"**/*.js\"",
     "test": "jest"
   },
   "dependencies": {
