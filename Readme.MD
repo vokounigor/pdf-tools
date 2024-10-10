@@ -22,4 +22,3 @@ Tools used for this project:
 - [express](https://expressjs.com/)
 - [ejs](https://ejs.co/#promo)
 - [htmx](https://htmx.org/)
-- [dayjs](https://day.js.org/)

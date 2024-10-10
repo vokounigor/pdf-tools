@@ -1,7 +1,6 @@
 import { writeFileSync, rmSync } from 'node:fs';
 import { execSync } from 'node:child_process';
-import dayjs from 'dayjs';
-import { DATE_FORMAT_MILLISECONDS } from '../constants/date.js';
+import crypto from 'node:crypto';
 
 /**
  * @param {string} file - pdf file to be dumped
@@ -17,9 +16,9 @@ function dumpDataFields(file, output) {
  * @returns {string} file name of the dumped data
  */
 export function dumpFieldsAndDeleteFile(fileBuffer) {
-  const timestamp = dayjs().format(DATE_FORMAT_MILLISECONDS);
-  const fileTempName = `file_${timestamp}.pdf`;
-  const fileOutput = `file_${timestamp}.txt`;
+  const uuid = crypto.randomUUID();
+  const fileTempName = `file_${uuid}.pdf`;
+  const fileOutput = `file_${uuid}.txt`;
 
   writeFileSync(fileTempName, fileBuffer);
   dumpDataFields(fileTempName, fileOutput);
